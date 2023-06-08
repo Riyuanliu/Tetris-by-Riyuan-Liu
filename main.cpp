@@ -13,23 +13,24 @@ const int N=10;
 const int CELLSIZE=18;
 TetrisGrid game;
 
-Tetrominoes a,b,c;
+Tetrominoes a,b,c,d;
 int main(){
     srand(time(0));
     
     RenderWindow window(VideoMode(420,480),"Tetris!");
     //load image from the folder
-    Texture t1,t2,t3;
+    Texture t1,t2,t3,t4;
     t1.loadFromFile("images/tiles.png");
-    t2.loadFromFile("images/background.png");
+    t2.loadFromFile("images/background1.jpg");
     t3.loadFromFile("images/frame.png");
-    Sprite s(t1), background(t2), frame(t3), s1(t1);
-
+    t4.loadFromFile("images/background.png");
+    Sprite s(t1), background(t4), frame(t3), s1(t1),grid(t2),s2(t1);
+    grid.move(28,31);
     int dx=0, colorNum=1;
     bool rotate=0,speedown=0,godown=0,movex=0;
     float timer=0,delay=0.3;
     int score=0,Highest_score=0;
-    int bcolnum=1;
+    int b1colnum=1,b2colnum=1;
     
     
     
@@ -40,6 +41,7 @@ int main(){
     a.movexcord(4);
     //first preview
     c.changeTetrominoestorandom();
+    d.changeTetrominoestorandom();
     
     while(window.isOpen()){
         float time=clock.getElapsedTime().asSeconds();
@@ -70,19 +72,22 @@ int main(){
             b=a;
             a.moveycord(1);
             if(!game.check(a)){
-                if(!game.placeTetrominoes_on_grid(bcolnum, b)){
+                if(!game.placeTetrominoes_on_grid(b1colnum, b)){
                     game.resetgame(score, Highest_score);
                 }
-                //check if player ran out of place
-                //spawning new shape
-                bcolnum=colorNum;
-                colorNum=1+rand()%7;
+                //
+                b1colnum=colorNum;
+                colorNum=b2colnum;
+                b2colnum=1+rand()%7;
                 //pull shape from the preview
                 a=c;
+                c=d;
                 //spawn new shape for the preview
-                c.changeTetrominoestorandom();
+//                c.changeTetrominoestorandom();
+                d.changeTetrominoestorandom();
                 //move the block to middle
                 a.movexcord(4);
+                a.moveycord(-1);
             }
             timer=0;
         }
@@ -93,6 +98,7 @@ int main(){
         
         window.clear(Color::White);
         window.draw(background);
+        window.draw(grid);
         //draw on the grid after place//
         for(int i=0;i<M;i++){
             for(int j=0;j<N;j++){
@@ -104,11 +110,14 @@ int main(){
             }
         }
         //drawing the shape//
-        drawingshapeongrid(window, a, 28, 31, bcolnum, s);
-        //drawing the preview//
+        drawingshapeongrid(window, a, 28, 31, b1colnum, s);
+        //drawing the box for next
         draw_box(window,240,25,150,100);
-        draw_text(static_cast<unsigned short>(CELLSIZE * (0.5f + 13)), static_cast<unsigned short>(0.5f * CELLSIZE * 3), "Preview:", window);
+        draw_text(static_cast<unsigned short>(CELLSIZE * (0.5f + 13)), static_cast<unsigned short>(0.5f * CELLSIZE * 3), "Next:", window);
+        //drawing the next 1//
         drawingshapeongrid(window, c, 240, 50, colorNum, s1);
+        //drawing the next 2//
+        drawingshapeongrid(window, d, 300, 50, b2colnum, s2);
         //drawing the highscore and curr score
         window.draw(frame);
         draw_box(window,240,277,150,50);

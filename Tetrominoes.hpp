@@ -85,7 +85,7 @@ public:
         }
     }
     void changeTetrominoestorandom(){
-        int n = rand() % 6 + 1;
+        int n = rand() % 7;
         for(int i=0;i<4;i++){
             a[i].x=figures[n][i]%2;
             a[i].y=figures[n][i]/2;
