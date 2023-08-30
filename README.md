@@ -14,6 +14,7 @@
       The project incorporates collision detection to prevent tetrominos from overlapping with existing blocks or the game boundaries. 
       It checks for collisions when moving or rotating tetrominos and adjusts their positions accordingly.
 *Scorekeeping: 
+<img width="82" alt="image" src="https://github.com/Riyuanliu/Tetris-by-Riyuan-Liu/assets/100328034/f3cad87a-3336-4459-b322-5d9f5730efc5">
       The project keeps track of the player's score based on the number of lines cleared. 
       It increments the score when lines are completed and updates the display accordingly.
 *Level and Speed: 
@@ -26,6 +27,7 @@
 *Random Tetromino Generation: 
       The project generates random tetrominos for the player to control and drop onto the game board. 
       It uses a random number generator to select the next tetromino from a predefined set of shapes.
+	  <img width="80" alt="image" src="https://github.com/Riyuanliu/Tetris-by-Riyuan-Liu/assets/100328034/a465a4b3-2b43-4f9f-b1be-abe451288ec0">
 *Additional Features: 
       Depending on the project's complexity, you can consider adding features like a preview of the next tetromino, 
       a "hold" mechanic to store a tetromino temporarily, special power-ups or bonus blocks, multiplayer support, or a high score leaderboard.
